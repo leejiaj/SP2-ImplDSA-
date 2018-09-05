@@ -1,3 +1,12 @@
+/**
+ * @author Priyanka Awaraddi
+ * @author Leejia James
+ *
+ * Implementing bounded-sized queue using arrays
+ *
+ * Ver 1.0: 2018/09/04
+ */
+
 package PXA172130;
 
 import java.util.Scanner;
@@ -7,12 +16,25 @@ public class BoundedQueue<T> {
 	int maxSize = 0;
 	Object[] bqueue;
 	
+    /**
+     * Creates new queue of given size
+     */
 	BoundedQueue(int size)
 	{
 		maxSize = size;
 		bqueue = new Object[size];		
 	}
 	
+    /**
+     * @author Priyanka Awaraddi
+     *
+     * Inserts a new element x at the rear of the queue
+     *
+     * @param x element to add
+     * 
+     * @return true if the element is added, false if the element 
+     * is not added because the queue is full
+     */
 	boolean offer(T x)
 	{
 		if(rear<maxSize)
@@ -24,6 +46,14 @@ public class BoundedQueue<T> {
 		return false;
 	}
 	
+	/**
+	 * @author Leejia James
+	 * 
+	 * Removes the element at the front of the queue
+	 * 
+	 * @return element at the front of the queue, null if the queue
+	 * is empty
+	 */
 	T poll()
 	{
 		if(isEmpty()) {
@@ -42,19 +72,44 @@ public class BoundedQueue<T> {
 		return null;
 	}
 	
+	/**
+	 * @author Priyanka Awaraddi
+	 * @author Leejia James
+	 * 
+	 * Finds the number of elements in the queue
+	 * 
+	 * @return the number of elements in the queue
+	 */
 	int size()
 	{
 		return rear;
 	}
 	
+	/**
+	 * @author Priyanka Awaraddi
+	 * @author Leejia James
+	 * 
+	 * Checks if the queue is empty
+	 * 
+	 * @return true if queue is empty, false otherwise
+	 */
 	boolean isEmpty()
 	{
-		return rear==0? true : false;
+		return rear == 0? true : false;
 	}
 	
+	/**
+	 * @author Leejia James
+	 * 
+	 * Clears the queue (size=0)
+	 * 
+	 */
 	void clear()
 	{
-		
+		for (Object obj: bqueue) {
+			obj = null;
+		}
+		rear = 0;
 	}
 	
 	void toArray(T[] a)
@@ -79,11 +134,11 @@ public class BoundedQueue<T> {
 			n = Integer.parseInt(args[0]);
 		}
 		
-		BoundedQueue<Integer> b1 = new BoundedQueue<>(10);
+		BoundedQueue<Integer> bq = new BoundedQueue<>(10);
 		for(int i=1; i<=n; i++) {
-			b1.offer(Integer.valueOf(i));
+			bq.offer(Integer.valueOf(i));
 		}
-		b1.printQueue();
+		bq.printQueue();
 		
 		Scanner in = new Scanner(System.in);
 		whileloop:
@@ -92,17 +147,38 @@ public class BoundedQueue<T> {
 			switch(com) {
 			case 1:  // Add a new element x at the rear of the queue
 				int elemAdd = in.nextInt();
-				b1.offer(elemAdd);
-				b1.printQueue();
+				bq.offer(elemAdd);
+				bq.printQueue();
 				break;
 			case 2:  // Remove and return the element at the front of the queue
-				System.out.println(b1.poll());
-				b1.printQueue();
+				System.out.println(bq.poll());
+				bq.printQueue();
 				break;
+			case 3:  // Return front element, without removing it 	
+				
+				bq.printQueue();
+				break;
+			case 4:  // Return the number of elements in the queue 
+				System.out.println(bq.size());
+				bq.printQueue();
+				break;
+			case 5:  // Check if the queue is empty
+				System.out.println(bq.isEmpty());
+				bq.printQueue();
+				break;
+			case 6:  // Clear the queue (size=0)
+				bq.clear();
+				bq.printQueue();
+				break;
+			case 7:  // fill user supplied array with the 
+					// elements of the queue, in queue order
+				
+				bq.printQueue();
+				break;				
 			default:  // Exit loop
 				break whileloop;
 			}
 		}
-		b1.printQueue();
+		bq.printQueue();
 	}
 }
