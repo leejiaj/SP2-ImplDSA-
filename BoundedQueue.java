@@ -67,9 +67,21 @@ public class BoundedQueue<T> {
 		return (T) temp;
 	}
 	
+	/**
+	 * @author Priyanka Awaraddi
+	 * 
+	 * Returns the front element without removing it
+	 * 
+	 * @return element at the front of the queue, null if the queue
+	 * is empty
+	 */
 	T peek()
 	{
-		return null;
+		if(isEmpty()) {
+			return null;
+		}
+		Object temp = bqueue[0];
+		return (T) temp;
 	}
 	
 	/**
@@ -112,9 +124,18 @@ public class BoundedQueue<T> {
 		rear = 0;
 	}
 	
+	/**
+	 * @author Priyanka Awaraddi
+	 * 
+	 * fill user supplied array with the elements of the queue, in queue order
+	 * 
+	 */
+	//what is the size of user array .? if its less than queue how to fill it.?
 	void toArray(T[] a)
 	{
-		
+		for(int i=0; i<rear; i++) {
+			a[i]=(T) bqueue[i];
+		}
 	}
 	
 	void printQueue()
@@ -155,7 +176,7 @@ public class BoundedQueue<T> {
 				bq.printQueue();
 				break;
 			case 3:  // Return front element, without removing it 	
-				
+				System.out.println(bq.peek());
 				bq.printQueue();
 				break;
 			case 4:  // Return the number of elements in the queue 
@@ -172,7 +193,12 @@ public class BoundedQueue<T> {
 				break;
 			case 7:  // fill user supplied array with the 
 					// elements of the queue, in queue order
-				
+				Integer[] a = new Integer[bq.size()];
+				bq.toArray(a);
+				for(Integer i: a)
+				{
+					System.out.println(i);
+				}
 				bq.printQueue();
 				break;				
 			default:  // Exit loop
