@@ -42,7 +42,7 @@ public class BoundedQueue<T> {
 		{
 			bqueue[rear] = x;
 			rear = (rear + 1 ) % maxSize;
-			size = size + 1;
+			size++;
 			return true;
 		}
 		return false;
@@ -64,7 +64,7 @@ public class BoundedQueue<T> {
 		Object temp = bqueue[front];
 		bqueue[front] = null;
 		front = (front + 1) % maxSize;
-		size = size - 1;
+		size--;
 		return (T) temp;
 	}
 	
@@ -81,7 +81,7 @@ public class BoundedQueue<T> {
 		if(isEmpty()) {
 			return null;
 		}
-		Object temp = bqueue[0];
+		Object temp = bqueue[front];
 		return (T) temp;
 	}
 	
